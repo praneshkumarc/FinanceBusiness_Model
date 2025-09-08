@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    command: gunicorn finwise.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8000:8000"
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/app
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "3000:3000"
